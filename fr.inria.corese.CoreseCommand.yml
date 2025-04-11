@@ -1,9 +1,9 @@
 app-id: fr.inria.corese.CoreseCommand
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.openjdk11
+sdk-extensions: 
+  - org.freedesktop.Sdk.Extension.openjdk
 command: run.sh
 
 finish-args:
@@ -15,35 +15,34 @@ modules:
   - name: openjdk
     buildsystem: simple
     build-commands:
-      - /usr/lib/sdk/openjdk11/install.sh
+      - /usr/lib/sdk/openjdk/install.sh
 
   - name: corese-command
     buildsystem: simple
     build-commands:
-      - install -Dm644 corese-command.jar /app/bin/corese-command.jar
-      - install -Dm755 run.sh /app/bin/run.sh
-      - install -Dm644 git_repo/corese-command/metadata/${FLATPAK_ID}.appdata.xml
-        /app/share/metainfo/${FLATPAK_ID}.appdata.xml
-      - install -Dm644 git_repo/corese-command/metadata/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 git_repo/corese-command/metadata/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
-
-    cleanup:
-      - git_repo
+      - install -Dm644 corese-command-standalone.jar /app/bin/corese-command-standalone.jar
+      - install -Dm755 packaging/flatpak/scripts/run.sh /app/bin/run.sh
+      - install -Dm644 packaging/flatpak/appdata/${FLATPAK_ID}.appdata.xml /app/share/metainfo/${FLATPAK_ID}.appdata.xml
+      - install -Dm644 packaging/flatpak/appdata/${FLATPAK_ID}.desktop /app/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 packaging/flatpak/assets/logo/${FLATPAK_ID}.svg /app/share/icons/hicolor/scalable/apps/${FLATPAK_ID}.svg
 
     sources:
+      # jar file from GitHub release
       - type: file
-        url: https://github.com/Wimmics/corese/releases/download/release-4.5.0/corese-command-4.5.0.jar
-        sha256: 106af73fa1689cd255bac67cbc37b83dbd65b6d76402f75999bff86fca248380
+        url: https://github.com/corese-stack/corese-command/releases/download/v4.6.0/corese-command-standalone.jar
+        sha256: 958c43ec88c3817d18f0593e3efbf2ee5e028212ab4e6e8fd1b7b0cdd9b7b5fa
         x-checker-data:
           type: json
-          url: https://api.github.com/repos/wimmics/corese/releases/latest
-          version-query: .tag_name | gsub("release-";"")
-          url-query: '"https://github.com/Wimmics/corese/releases/download/release-"
-            + $version + "/corese-command-" + $version + ".jar"'
-        dest-filename: corese-command.jar
-      - type: git
-        dest: git_repo
-        url: https://github.com/Wimmics/corese
-        tag: metadata-4.5.0
-      - type: file
-        path: run.sh
+          url: https://api.github.com/repos/corese-stack/corese-command/releases/latest
+          version-query: .tag_name
+          url-query: '"https://github.com/corese-stack/corese-command/releases/download/" + $version + "/corese-command-standalone.jar"'
+
+      # appdata, desktop and icon files from GitHub repository
+      - type: archive
+        url: https://github.com/corese-stack/corese-command/archive/refs/tags/v4.6.0.tar.gz
+        sha256: aff230ea69905a0942588870a8d3173644ba3b43a1079d47a323f3cf5e8e6c7f
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/corese-stack/corese-command/releases/latest
+          version-query: .tag_name
+          url-query: '"https://github.com/corese-stack/corese-command/archive/refs/tags/" + $version + ".tar.gz"'
