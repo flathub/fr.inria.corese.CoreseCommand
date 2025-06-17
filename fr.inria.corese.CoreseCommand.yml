@@ -2,7 +2,7 @@ app-id: fr.inria.corese.CoreseCommand
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions: 
+sdk-extensions:
   - org.freedesktop.Sdk.Extension.openjdk
 command: run.sh
 
@@ -29,20 +29,22 @@ modules:
     sources:
       # jar file from GitHub release
       - type: file
-        url: https://github.com/corese-stack/corese-command/releases/download/v4.6.0/corese-command-standalone.jar
-        sha256: 958c43ec88c3817d18f0593e3efbf2ee5e028212ab4e6e8fd1b7b0cdd9b7b5fa
+        url: https://github.com/corese-stack/corese-command/releases/download/v4.6.1/corese-command-standalone.jar
+        sha256: 049c2725b2d61ca0f753ff6ba765f7277ace538a30b3fd78ef53079ad3cd98f5
         x-checker-data:
           type: json
           url: https://api.github.com/repos/corese-stack/corese-command/releases/latest
           version-query: .tag_name
-          url-query: '"https://github.com/corese-stack/corese-command/releases/download/" + $version + "/corese-command-standalone.jar"'
+          url-query: '"https://github.com/corese-stack/corese-command/releases/download/"
+            + $version + "/corese-command-standalone.jar"'
 
       # appdata, desktop and icon files from GitHub repository
       - type: archive
-        url: https://github.com/corese-stack/corese-command/archive/refs/tags/v4.6.0.tar.gz
-        sha256: aff230ea69905a0942588870a8d3173644ba3b43a1079d47a323f3cf5e8e6c7f
+        url: https://github.com/corese-stack/corese-command/archive/refs/tags/v4.6.1.tar.gz
+        sha256: 3821dea192923d3380444824429c090ea851a8e63228bacffb7f3fe39fb57d63
         x-checker-data:
           type: json
           url: https://api.github.com/repos/corese-stack/corese-command/releases/latest
           version-query: .tag_name
-          url-query: '"https://github.com/corese-stack/corese-command/archive/refs/tags/" + $version + ".tar.gz"'
+          url-query: '"https://github.com/corese-stack/corese-command/archive/refs/tags/"
+            + $version + ".tar.gz"'
