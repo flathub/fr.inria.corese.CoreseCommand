@@ -29,8 +29,8 @@ modules:
     sources:
       # jar file from GitHub release
       - type: file
-        url: https://github.com/corese-stack/corese-command/releases/download/v4.6.1/corese-command-standalone.jar
-        sha256: 049c2725b2d61ca0f753ff6ba765f7277ace538a30b3fd78ef53079ad3cd98f5
+        url: https://github.com/corese-stack/corese-command/releases/download/v4.6.2/corese-command-standalone.jar
+        sha256: 88a80024319d8d61c611aa21522ee391bfa41ac0a5ddd6306159c36f82d647cc
         x-checker-data:
           type: json
           url: https://api.github.com/repos/corese-stack/corese-command/releases/latest
@@ -40,8 +40,8 @@ modules:
 
       # appdata, desktop and icon files from GitHub repository
       - type: archive
-        url: https://github.com/corese-stack/corese-command/archive/refs/tags/v4.6.1.tar.gz
-        sha256: 3821dea192923d3380444824429c090ea851a8e63228bacffb7f3fe39fb57d63
+        url: https://github.com/corese-stack/corese-command/archive/refs/tags/v4.6.2.tar.gz
+        sha256: b02a8968fd4578c3a33eed4ca43bc917cd9f91a81e044c46246a04a6d5d43787
         x-checker-data:
           type: json
           url: https://api.github.com/repos/corese-stack/corese-command/releases/latest
